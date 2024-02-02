@@ -4,19 +4,19 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.urls import reverse
 
-MONTHLY_CHALLENGES: dict[str, bytes] = {
-    "january": b"Eat no meat for the entire month!",
-    "february": b"Walk for at least 20 minutes every day!",
-    "march": b"Learn Django for at least 20 minutes every day!",
-    "april": b"Eat no meat for the entire month!",
-    "may": b"Walk for at least 20 minutes every day!",
-    "june": b"Learn Django for at least 20 minutes every day!",
-    "july": b"Eat no meat for the entire month!",
-    "august": b"Walk for at least 20 minutes every day!",
-    "september": b"Eat no meat for the entire month!",
-    "october": b"Eat no meat for the entire month!",
-    "november": b"Walk for at least 20 minutes every day!",
-    "december": b"Eat no meat for the entire month!",
+MONTHLY_CHALLENGES: dict[str, str] = {
+    "january": "Eat no meat for the entire month!",
+    "february": "Walk for at least 20 minutes every day!",
+    "march": "Learn Django for at least 20 minutes every day!",
+    "april": "Eat no meat for the entire month!",
+    "may": "Walk for at least 20 minutes every day!",
+    "june": "Learn Django for at least 20 minutes every day!",
+    "july": "Eat no meat for the entire month!",
+    "august": "Walk for at least 20 minutes every day!",
+    "september": "Eat no meat for the entire month!",
+    "october": "Eat no meat for the entire month!",
+    "november": "Walk for at least 20 minutes every day!",
+    "december": "Eat no meat for the entire month!",
 }
 
 # Create your views here.
@@ -48,6 +48,8 @@ def monthly_challenge(request: HttpRequest, month: str) -> HttpResponse:
     if month not in MONTHLY_CHALLENGES:
         return HttpResponseNotFound(b"<h1>Wrong month spelling!</h1>")
 
-    response_data = render_to_string("challenges/challenge.html")
-    return HttpResponse(response_data)
-    # return HttpResponse(f"<h1>{MONTHLY_CHALLENGES[month]}</h1>".encode())
+    return render(
+        request,
+        "challenges/challenge.html",
+        {"month": month.capitalize(), "challenge": MONTHLY_CHALLENGES[month]},
+    )
