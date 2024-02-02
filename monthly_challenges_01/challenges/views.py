@@ -1,6 +1,7 @@
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.http.response import HttpResponseNotFound
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.urls import reverse
 
 MONTHLY_CHALLENGES: dict[str, bytes] = {
@@ -47,4 +48,6 @@ def monthly_challenge(request: HttpRequest, month: str) -> HttpResponse:
     if month not in MONTHLY_CHALLENGES:
         return HttpResponseNotFound(b"<h1>Wrong month spelling!</h1>")
 
-    return HttpResponse(f"<h1>{MONTHLY_CHALLENGES[month]}</h1>".encode())
+    response_data = render_to_string("challenges/challenge.html")
+    return HttpResponse(response_data)
+    # return HttpResponse(f"<h1>{MONTHLY_CHALLENGES[month]}</h1>".encode())
