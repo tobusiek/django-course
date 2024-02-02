@@ -13,3 +13,5 @@
 ### Create app in project
 
 `python3 manage.py startapp <app name>`
+
+## Notes for files
