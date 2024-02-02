@@ -51,5 +51,5 @@ def monthly_challenge(request: HttpRequest, month: str) -> HttpResponse:
     return render(
         request,
         "challenges/challenge.html",
-        {"month": month.capitalize(), "challenge": MONTHLY_CHALLENGES[month]},
+        {"month": month, "challenge": MONTHLY_CHALLENGES[month]},
     )
