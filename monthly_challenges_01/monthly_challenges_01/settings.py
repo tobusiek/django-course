@@ -55,9 +55,7 @@ ROOT_URLCONF = "monthly_challenges_01.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            # BASE_DIR / "challenges" / "templates"
-        ],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
