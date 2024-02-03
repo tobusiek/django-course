@@ -1,4 +1,4 @@
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
 from django.http.response import HttpResponseNotFound
 from django.shortcuts import render
 from django.template.loader import render_to_string
@@ -18,6 +18,7 @@ MONTHLY_CHALLENGES: dict[str, str] = {
     "november": "Walk for at least 20 minutes every day!",
     "december": "Eat no meat for the entire month!",
 }
+
 
 # Create your views here.
 
@@ -41,7 +42,8 @@ def monthly_challenge_by_number(request: HttpRequest, month: int) -> HttpRespons
 
 def monthly_challenge(request: HttpRequest, month: str) -> HttpResponse:
     if month not in MONTHLY_CHALLENGES:
-        return HttpResponseNotFound(b"<h1>Wrong month spelling!</h1>")
+        response_data = render_to_string("404.html")
+        raise Http404(response_data)
 
     return render(
         request,
