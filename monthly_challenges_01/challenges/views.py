@@ -23,14 +23,9 @@ MONTHLY_CHALLENGES: dict[str, str] = {
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    list_months = "<ol>"
-
-    for month in MONTHLY_CHALLENGES:
-        capitalized_month = month.capitalize()
-        month_path = reverse("month-challenge", args=[month])
-        list_months += f'<li><a href="{month_path}">{capitalized_month}</a></li>'
-
-    return HttpResponse(f"{list_months}</ol>".encode())
+    return render(
+        request, "challenges/index.html", {"months": list(MONTHLY_CHALLENGES.keys())}
+    )
 
 
 def monthly_challenge_by_number(request: HttpRequest, month: int) -> HttpResponse:
