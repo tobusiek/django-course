@@ -1,0 +1,8 @@
+[tool.ruff]
+lint.extend-select = ["ANN", "C4", "COM", "I", "N", "PT", "RET", "SIM", "TCH", "TID"]
+lint.ignore = ["ANN101", "ANN102"]
+show-fixes = true
+line-length = 120
+
+[tool.ruff.lint.isort]
+case-sensitive = true

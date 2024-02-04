@@ -24,9 +24,7 @@ MONTHLY_CHALLENGES: dict[str, str] = {
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    return render(
-        request, "challenges/index.html", {"months": list(MONTHLY_CHALLENGES.keys())}
-    )
+    return render(request, "challenges/index.html", {"months": list(MONTHLY_CHALLENGES.keys())})
 
 
 def monthly_challenge_by_number(request: HttpRequest, month: int) -> HttpResponse:
