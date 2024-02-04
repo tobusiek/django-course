@@ -14,4 +14,12 @@
 
 `python3 manage.py startapp <app name>`
 
+### Create models migration
+
+`python3 manage.py makemigrations`
+
+### Migrate models to db
+
+`python3 manage.py migrate`
+
 ## Notes for files
