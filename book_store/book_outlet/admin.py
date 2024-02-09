@@ -9,6 +9,7 @@ class BookAdmin(admin.ModelAdmin):
     # readonly_fields = ("slug",)  # cannot be set with the line below
     prepopulated_fields = {"slug": ("title",)}
     list_filter = ("author", "rating")
+    list_display = ("title", "author")
 
 
 admin.site.register(Book, BookAdmin)
