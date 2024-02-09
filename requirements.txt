@@ -1,4 +1,7 @@
-Django
+Django==4.2
+django-stubs-ext
+django-stubs==4.2.7
+djlint
 ruff
 black
-djlint
+mypy==1.7
