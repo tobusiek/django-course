@@ -1,5 +1,5 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from book_outlet.models import Book
 
@@ -13,5 +13,19 @@ def index(request: HttpRequest) -> HttpResponse:
         "book_outlet/index.html",
         {
             "books": books,
+        },
+    )
+
+
+def book_detail(request: HttpRequest, id: int) -> HttpResponse:
+    book = get_object_or_404(Book, pk=id)
+    return render(
+        request,
+        "book_outlet/book_detail.html",
+        {
+            "title": book.title,
+            "author": book.author,
+            "rating": book.rating,
+            "is_bestseller": book.is_bestselling,
         },
     )
