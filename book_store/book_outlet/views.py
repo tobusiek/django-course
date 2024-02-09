@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 
@@ -7,12 +8,17 @@ from book_outlet.models import Book
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    books = Book.objects.all()
+    books = Book.objects.all().order_by("-rating")  # descending order
+    num_books = books.count()
+    avg_rating = books.aggregate(Avg("rating"))
+
     return render(
         request,
         "book_outlet/index.html",
         {
             "books": books,
+            "books_total": num_books,
+            "avg_rating": avg_rating,
         },
     )
 
