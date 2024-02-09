@@ -5,4 +5,9 @@ from book_outlet.models import Book
 # Register your models here.
 
 
-admin.site.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    # readonly_fields = ("slug",)  # cannot be set with the line below
+    prepopulated_fields = {"slug": ("title",)}
+
+
+admin.site.register(Book, BookAdmin)
