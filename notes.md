@@ -14,6 +14,10 @@
 
 `python3 manage.py startapp <app name>`
 
+### Create admin user
+
+`python3 manage.py createsuperuser`
+
 ### Create models migration
 
 `python3 manage.py makemigrations`
@@ -28,7 +32,7 @@
 
 ## Notes for models in shell
 
-### Get all objects for model (import model first) 
+### Get all objects for model (import model first)
 
 `<model>.objects.all()`
 
@@ -55,16 +59,17 @@
 ### Query filters (modifiers like lt, ge, etc.)
 
 `<models>.objects.filter(<attr>__<modifier>=<val>)`
-Book.objects.filter(rating__lt=3, title__contains='Story')
+Book.objects.filter(rating\_\_lt=3, title\_\_contains='Story')
 
 ### Query filters with logical operators (| - or; , - and)
 
-```
+```shell
 from django.db.models import Q
 Book.objects.filter(Q(<attr>__<mod>=<val>) | Q(<attr>=<val>))
 Book.objects.filter(Q(<attr>__<mod>=<val>) | Q(<attr>=<val>), <attr>=<val>)
 ```
-Book.objects.filter(Q(rating__lt=3) | Q(is_bestselling=True))
-Book.objects.filter(Q(rating__lt=3) | Q(is_bestselling=True), author="J.K. Rowling")
+
+Book.objects.filter(Q(rating\_\_lt=3) | Q(is_bestselling=True))
+Book.objects.filter(Q(rating\_\_lt=3) | Q(is_bestselling=True), author="J.K. Rowling")
 
 #### Storing in a variable caches query, doesn't hit db mutliple times
