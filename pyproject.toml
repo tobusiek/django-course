@@ -11,7 +11,7 @@ lint.extend-select = [
   "TCH",
   "TID",
 ]
-lint.ignore = ["ANN101", "ANN102", "COM812"]
+lint.ignore = ["ANN002", "ANN003", "ANN101", "ANN102", "COM812"]
 show-fixes = true
 line-length = 120
 
