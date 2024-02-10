@@ -1,20 +1,35 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Your review</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="{% static "reviews/styles.css" %}" rel="stylesheet" />
   </head>
+ 
   <body>
-    <form action="/" method="POST">
+    <form action="/" method="post">
       {% csrf_token %}
-      {% if has_error %}
-        <p>
-          This form is invalid - please enter a valid username
-        </p>
-      {% endif %}
-      {{ form }}
+      <div class="form-control {% if form.user_name.errors %}errors{% endif %}">
+        {{ form.user_name.label_tag }}
+        {{ form.user_name }}
+        {{ form.user_name.errors }}
+      </div>
+
+      <div class="form-control {% if form.review_text.errors %}errors{% endif %}">
+        {{ form.review_text.label_tag }}
+        {{ form.review_text }}
+        {{ form.review_text.errors }}
+      </div>
+ 
+      <div class="form-control {% if form.rating.errors %}errors{% endif %}">
+        {{ form.rating.label_tag }}
+        {{ form.rating }}
+        {{ form.rating.errors }}
+      </div>
+ 
       <button>
         Send
       </button>
