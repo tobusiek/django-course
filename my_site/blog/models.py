@@ -29,7 +29,7 @@ class Post(models.Model):
     )
     title = models.CharField(max_length=150)
     excerpt = models.CharField(max_length=200)
-    image_name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="posts", null=True)
     date = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField(Tag)
     slug = models.SlugField(unique=True)
