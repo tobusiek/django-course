@@ -14,10 +14,10 @@
         <header>
             <h1 id="main-navigation">
                 <a href="{% url "starting-page" %}">My Blog</a>
+                <nav>
+                    <a href="{% url "posts-page" %}">All posts</a>
+                </nav>
             </h1>
-            <nav>
-                <a href="{% url "posts-page" %}">All posts</a>
-            </nav>
         </header>
         {% block content %}{% endblock %}
     </body>
