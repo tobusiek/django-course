@@ -5,3 +5,4 @@ djlint
 ruff
 black
 mypy==1.7
+pillow
