@@ -18,7 +18,7 @@ class ReviewView(views.View):
             form.save()
             return redirect("/thank-you")
 
-        return self.get(request)
+        return render(request, "reviews/review.html", {"form": form})
 
 
 def thank_you(request: HttpRequest) -> HttpResponse:
