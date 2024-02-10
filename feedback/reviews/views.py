@@ -1,6 +1,5 @@
 from typing import Any
 
-from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
