@@ -2,6 +2,7 @@ from typing import Any
 
 from django.views.generic import DetailView, ListView
 
+from blog.forms import CommentForm
 from blog.models import Post
 
 # Create your views here.
@@ -31,4 +32,5 @@ class SinglePostView(DetailView):
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["post_tags"] = self.object.tags.all()
+        context["comment_form"] = CommentForm()
         return context
