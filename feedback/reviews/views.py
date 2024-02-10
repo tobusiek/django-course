@@ -3,6 +3,7 @@ from typing import Any
 from django import views
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
+from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 
 from reviews.forms import ReviewForm
@@ -34,14 +35,13 @@ class ThankYouView(TemplateView):
         return context
 
 
-class ReviewsListView(TemplateView):
+class ReviewsListView(ListView):
     template_name = "reviews/review_list.html"
+    model = Review
+    context_object_name = "reviews"
 
-    def get_context_data(self, **kwargs) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        reviews = Review.objects.all()
-        context["reviews"] = reviews
-        return context
+    # def get_queryset(self):  # noqa
+    #     return super().get_queryset().filter(rating__gt=3)  # type: ignore
 
 
 class SingleReviewView(TemplateView):
