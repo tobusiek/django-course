@@ -3,7 +3,7 @@ from typing import Any
 from django import views
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateView
 
 from reviews.forms import ReviewForm
@@ -44,12 +44,6 @@ class ReviewsListView(ListView):
     #     return super().get_queryset().filter(rating__gt=3)  # type: ignore
 
 
-class SingleReviewView(TemplateView):
+class SingleReviewView(DetailView):
     template_name = "reviews/single_review.html"
-
-    def get_context_data(self, **kwargs) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        review_id = kwargs["id"]
-        review = Review.objects.get(pk=review_id)
-        context["review"] = review
-        return context
+    model = Review
