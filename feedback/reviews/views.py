@@ -1,9 +1,9 @@
 from typing import Any
-from django.http import HttpResponse
 
+from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import CreateView
 
 from reviews.forms import ReviewForm
 from reviews.models import Review
@@ -11,26 +11,11 @@ from reviews.models import Review
 # Create your views here.
 
 
-class ReviewView(FormView):
+class ReviewView(CreateView):
+    model = Review
     form_class = ReviewForm
     template_name = "reviews/review.html"
     success_url = "/thank-you"
-
-    def form_valid(self, form: ReviewForm) -> HttpResponse:
-        form.save()
-        return super().form_valid(form)
-
-    # def get(self, request: HttpRequest) -> HttpResponse:
-    #     return render(request, "reviews/review.html", {"form": ReviewForm()})
-    #
-    # def post(self, request: HttpRequest) -> HttpResponse:
-    #     form = ReviewForm(request.POST)
-    #
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect("/thank-you")
-    #
-    #     return render(request, "reviews/review.html", {"form": form})
 
 
 class ThankYouView(TemplateView):
