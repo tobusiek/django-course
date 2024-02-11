@@ -35,6 +35,9 @@ class Post(models.Model):
     slug = models.SlugField(unique=True)
     content = models.TextField(validators=[MinLengthValidator(10)])
 
+    def __str__(self) -> str:
+        return f"{self.title}"
+
 
 class Comment(models.Model):
     user_name = models.CharField(max_length=120)
