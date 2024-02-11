@@ -1,24 +1,29 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>
-            {% block title %}{% endblock %}
-        </title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="{% static 'app.css' %}" />
-        {% block css_files %}{% endblock %}
-    </head>
-    <body>
-        <header>
-            <h1 id="main-navigation">
-                <a href="{% url "starting-page" %}">My Blog</a>
-                <nav>
-                    <a href="{% url "posts-page" %}">All posts</a>
-                </nav>
-            </h1>
-        </header>
-        {% block content %}{% endblock %}
-    </body>
+  <head>
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'app.css' %}" />
+    {% block css_files %}
+    {% endblock %}
+  </head>
+  <body>
+    <header>
+      <h1 id="main-navigation">
+        <a href="{% url "starting-page" %}">My Blog</a>
+        <nav>
+          <a href="{% url "posts-page" %}">All posts</a>
+          <a href="{% url "read-later" %}">All posts</a>
+        </nav>
+      </h1>
+    </header>
+    {% block content %}
+    {% endblock %}
+  </body>
 </html>
