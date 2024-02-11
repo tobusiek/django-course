@@ -10,28 +10,34 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from os import getenv
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-chbz@*s3$vhxb-6g0fwui_udfu8z=$t(iw4x7336r4#e!l2=(z"
+SECRET_KEY = getenv("SECRET_KEY", "KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv("IS_DEVELOPMENT", True)
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    getenv("APP_HOST", "localhost"),
+]
 
 # Application definition
 
 INSTALLED_APPS = [
     "blog",
+    "storages",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -72,17 +78,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "my_site.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends." + getenv("DB_ENGINE", "sqlite3"),
+        "NAME": getenv("DB_NAME", BASE_DIR / "db.sqlite3"),
+        "USER": getenv("DB_USERNAME", ""),
+        "PASSWORD": getenv("DB_PASSWORD", ""),
+        "HOST": getenv("DB_HOST", "localhost"),
+        "PORT": getenv("DB_PORT", 8080),
     },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -102,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -114,10 +121,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -130,3 +137,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_ROOT = BASE_DIR / "uploads"
 MEDIA_URL = "/files/"
+
+AWS_STORAGE_BUCKET_NAME = getenv("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME = getenv("AWS_S3_REGION_NAME")
+AWS_ACCESS_KEY_ID = getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = getenv("AWS_SECRET_ACCESS_KEY")
+
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+
+STATICFILES_FOLDER = "static"
+MEDIAFILES_FOLDER = "media"
+
+STATICFILES_STORAGE = "custom_storages.StaticFileStorage"
+DEFAULT_FILE_STORAGE = "custom_storages.MediaFileStorage"
