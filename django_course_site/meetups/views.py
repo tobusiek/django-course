@@ -22,3 +22,11 @@ def index(request: HttpRequest) -> HttpResponse:
         "meetups/index.html",
         {"meetups": meetups, "show_meetups": True},
     )
+
+
+def meetup_details(request: HttpRequest, slug: str) -> HttpResponse:
+    selected_meetup = {
+        "title": "A first meetup",
+        "description": "This is the first meetup",
+    }
+    return render(request, "meetups/meetup-details.html", selected_meetup)
