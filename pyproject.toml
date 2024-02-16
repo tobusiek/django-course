@@ -26,3 +26,4 @@ blank_line_before_tag = "load,extends,include"
 preserve_blank_lines = true
 close_void_tags = true
 profile = "django"
+max_line_length = 100

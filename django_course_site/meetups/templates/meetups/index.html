@@ -26,7 +26,7 @@
     <ol>
       {% for meetup in meetups %}
 
-        {% include "includes/meetup-item.html" with title=meetup.title location=meetup.location %}
+        {% include "includes/meetup-item.html" with title=meetup.title location='New York' slug=meetup.slug image=meetup.image.url %}
 
       {% endfor %}
     </ol>

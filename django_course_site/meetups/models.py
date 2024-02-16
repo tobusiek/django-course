@@ -3,8 +3,22 @@ from django.db import models
 # Create your models here.
 
 
+class Location(models.Model):
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=300)
+
+    def __str__(self) -> str:
+        return f"{self.name} ({self.address})"
+
+
 class Meetup(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     description = models.TextField()
-    # location = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="images")
+    location = models.ForeignKey(
+        Location, on_delete=models.CASCADE, related_name="meetups"
+    )
+
+    def __str__(self) -> str:
+        return f"{self.title} - {self.slug}"
