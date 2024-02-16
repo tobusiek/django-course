@@ -5,4 +5,20 @@ from django.shortcuts import render
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    return render(request, "meetups/index.html")
+    meetups = [
+        {
+            "title": "A first meetup",
+            "location": "New York",
+            "slug": "first-meetup",
+        },
+        {
+            "title": "A second meetup",
+            "location": "Paris",
+            "slug": "second-meetup",
+        },
+    ]
+    return render(
+        request,
+        "meetups/index.html",
+        {"meetups": meetups, "show_meetups": True},
+    )
