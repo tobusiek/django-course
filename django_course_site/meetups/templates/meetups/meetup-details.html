@@ -12,7 +12,7 @@
 
 {% block main_heading %}
   {{ meetup.title }}
-{% endblock %}
+{% endblock main_heading %}
 
 {% block body %}
   {% if meetup_found %}
@@ -35,7 +35,7 @@
         </p>
         <footer>
           <p>
-            Need more details? Please <a href="{{ meetup.organizer_email }}">contact the organizer</a> (but don't spam us :))
+            Need more details? Please <a href="mailto:{{ meetup.organizer_email }}">contact the organizer</a> (but don't spam us :))
           </p>
         </footer>
       </section>
@@ -44,7 +44,7 @@
         <h2>
           Join us!
         </h2>
-        <form action="{% url 'meetup-details' meetup.slug %}" method="POST">
+        <form action="{% url 'meetup-details' meetup.slug %}" method="post">
           {% csrf_token %}
           <ul>
             {{ form.as_ul }}
@@ -62,4 +62,4 @@
       No meetup found for this slug, sorry!
     </p>
   {% endif %}
-{% endblock %}
+{% endblock body %}

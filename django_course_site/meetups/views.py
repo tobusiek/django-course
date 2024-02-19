@@ -29,7 +29,7 @@ def meetup_details(request: HttpRequest, slug: str) -> HttpResponse:
                     email=participant_email
                 )
                 selected_meetup.participants.add(participant)
-                return redirect("confirm-registration")
+                return redirect("confirm-registration", slug=slug)
         return render(
             request,
             "meetups/meetup-details.html",
@@ -45,5 +45,10 @@ def meetup_details(request: HttpRequest, slug: str) -> HttpResponse:
         )
 
 
-def confirm_registration(request: HttpRequest) -> HttpResponse:
-    return render(request, "meetups/registration-success.html")
+def confirm_registration(request: HttpRequest, slug: str) -> HttpResponse:
+    meetup = Meetup.objects.get(slug=slug)
+    return render(
+        request,
+        "meetups/registration-success.html",
+        {"organizer_email": meetup.organizer_email},
+    )

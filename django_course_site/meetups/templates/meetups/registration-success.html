@@ -13,11 +13,11 @@
 
 {% block main_heading %}
   Thanks for signing up!
-{% endblock %}
+{% endblock main_heading %}
 
 {% block header_content %}
 
-{% endblock %}
+{% endblock header_content %}
 
 {% block body %}
   <section id="confirmation">
@@ -28,7 +28,7 @@
       Thanks for signing up - see you at the meetup!
     </p>
     <p>
-      Got questions or can't make it? Please <a href="">contact the organizer</a> ahead of time
+      Got questions or can't make it? Please <a href="mailto:{{ organizer_email }}">contact the organizer</a> ahead of time
     </p>
   </section>
  
@@ -37,7 +37,7 @@
       Of course, you can sign up for more than one meetup!
     </p>
     <p>
-      <a href="/meetups" class="btn">Explore our meetups</a>
+      <a href="{% {% url "all-meetups" %}%}" class="btn">Explore our meetups</a>
     </p>
   </section>
-{% endblock %}
+{% endblock body %}
