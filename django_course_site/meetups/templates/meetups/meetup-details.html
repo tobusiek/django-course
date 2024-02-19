@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-  {{ title }}
+  {{ meetup.title }}
 {% endblock title %}
 
 {% block site_css %}
@@ -11,19 +11,19 @@
 {% endblock site_css %}
 
 {% block main_heading %}
-  {{ title }}
+  {{ meetup.title }}
 {% endblock %}
 
 {% block body %}
   {% if meetup_found %}
     <article>
-      <img src="" alt="" />
+      <img id="main-image" src="{{ meetup.image.url }}" alt="{{ meetup.title }}" />
  
       <section id="location">
         <h2>
           Meetup location
         </h2>
-        <address>This meetup takes place in <span>LOCATION</span> (ADDRESS).</address>
+        <address>This meetup takes place in <span>{{ meetup.location.name }}</span> ({{ meetup.location.address }}).</address>
       </section>
  
       <section id="details">
@@ -31,11 +31,11 @@
           What's this meetup about?
         </h2>
         <p>
-          {{ description }}
+          {{ meetup.description }}
         </p>
         <footer>
           <p>
-            Need more details? Please <a href="">contact the organizer</a> (but don't spam us :))
+            Need more details? Please <a href="{{ meetup.organizer_email }}">contact the organizer</a> (but don't spam us :))
           </p>
         </footer>
       </section>
@@ -44,7 +44,17 @@
         <h2>
           Join us!
         </h2>
-        FORM
+        <form action="{% url 'meetup-details' meetup.slug %}" method="POST">
+          {% csrf_token %}
+          <ul>
+            {{ form.as_ul }}
+          </ul>
+          <div id="registration-actions">
+            <button>
+              Register
+            </button>
+          </div>
+        </form>
       </section>
     </article>
   {% else %}
