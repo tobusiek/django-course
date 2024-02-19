@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-  <title>All meetups</title>
+  All meetups
 {% endblock title %}
 
 {% block site_css %}
@@ -26,7 +26,7 @@
     <ol>
       {% for meetup in meetups %}
 
-        {% include "includes/meetup-item.html" with title=meetup.title location='New York' slug=meetup.slug image=meetup.image.url %}
+        {% include "includes/meetup-item.html" with title=meetup.title location="New York" slug=meetup.slug image=meetup.image.url %}
 
       {% endfor %}
     </ol>
